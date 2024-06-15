@@ -1,0 +1,5 @@
+npm i morgan 
+npm i ejs
+npm i mongoose
+npm i nodemon
+npm i express
