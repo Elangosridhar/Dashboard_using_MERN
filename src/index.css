@@ -1,0 +1,32 @@
+@import "../node_modules/@flaticon/flaticon-uicons/css/all/all";
+@import "../node_modules/primereact/resources/themes/lara-light-cyan/theme.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.p-datatable-rsponsive-scroll,tr{
+    width:100%
+}
+
+.p-dropdown-items-wrapper{
+    background-color: white;
+    color: black;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+
+}
+
+.p-drowpdown-item{
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.p-dropdown-item:hover{
+    background-color: white;
+    color: black;
+}
+
+
+
+
