@@ -45,7 +45,7 @@ export default function Header() {
                             </button>
                         </li>
                         <li>
-                            <Link to="/"><i className="fi fi-sr-home text-white"></i></Link>
+                            <Link to="/home"><i className="fi fi-sr-home text-white"></i></Link>
                         </li>
                         <li><a href="#"><i className="fi fi-tr-circle-half-stroke text-white"></i></a></li>
                         <li><a href="#"><i className="fi fi-rr-expand text-white"></i></a></li>

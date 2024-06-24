@@ -39,39 +39,24 @@ const {handleChange,handleopen,togglePasswordVisibility,passwordVisible,loaddata
                               <Column field="otp_email" header="OTP Email" sortable filter></Column>
             </DataTable>
            </div>
-
-           <Modal
-  backdrop="opaque"
-  isOpen={isOpen}
-  onOpenChange={onOpenChange}
- 
-  classNames={{
-    backdrop: "bg-gradient-to-t from-zinc-900 to-zinc-900/10 backdrop-opacity-20"
-  }}
-  style={{ maxWidth: '80vw', width: '80%' }} >
-    
-  <ModalContent>
+ <Modal backdrop="opaque" isOpen={isOpen} onOpenChange={onOpenChange} classNames={{backdrop: "bg-gradient-to-t from-zinc-900 to-zinc-900/10 backdrop-opacity-20" }} style={{ maxWidth: '80vw', width: '80%' }} >
+   <ModalContent>
     {(onClose) => (
       <>
         <ModalHeader className="flex flex-col gap-1">Employee Information</ModalHeader>
-        
         <ModalBody className="flex flex-wrap gap-4">
-       
           <div className="flex w-full flex-wrap md:flex-nowrap gap-4 items-center">
             <div className="flex flex-col w-full md:w-1/3">
               <label >Employee ID:</label>
-              <input className="border p-2 rounded hover:border-blue-500" type="text"  name="employee_id"  
-              value={formdata?.employee_id} onChange={handleChange} />
+              <input className="border p-2 rounded hover:border-blue-500" type="text"  name="employee_id"  value={formdata?.employee_id} onChange={handleChange} />
             </div>
             <div className="flex flex-col w-full md:w-1/3">
               <label >Employee Name:</label>
-              <input className="border p-2 rounded hover:border-blue-500" type="text"  name="employee_name" placeholder="Enter Employee Name" onChange={handleChange}
-              value={formdata?.employee_name} required/>
+              <input className="border p-2 rounded hover:border-blue-500" type="text"  name="employee_name" placeholder="Enter Employee Name" onChange={handleChange} value={formdata?.employee_name} required/>
             </div>
             <div className="flex flex-col w-full md:w-1/3">
               <label >Employee Email:</label>
-              <input className="border p-2 rounded hover:border-blue-500" type="email"  name="employee_email" placeholder="Enter Employee Email" onChange={handleChange}
-              value={formdata?.employee_email} required />
+              <input className="border p-2 rounded hover:border-blue-500" type="email"  name="employee_email" placeholder="Enter Employee Email" onChange={handleChange}  value={formdata?.employee_email} required />
             </div>
           </div>
 
@@ -87,13 +72,11 @@ const {handleChange,handleopen,togglePasswordVisibility,passwordVisible,loaddata
             </div>
             <div className="flex flex-col w-full md:w-1/3">
               <label >Date of Birth:</label>
-              <input className="border p-2 rounded hover:border-blue-500" type="text"  name="date_of_birth" placeholder="Enter Date of Birth"  onChange={handleChange} 
-              value={formdata?.date_of_birth} required/>
+              <input className="border p-2 rounded hover:border-blue-500" type="text"  name="date_of_birth" placeholder="Enter Date of Birth"  onChange={handleChange}  value={formdata?.date_of_birth} required/>
             </div>
             <div className="flex flex-col w-full md:w-1/3">
               <label >Date of Joining:</label>
-              <input className="border p-2 rounded hover:border-blue-500" type="text" id="doj" name="date_of_joining" placeholder="Enter Date of Joining" onChange={handleChange}
-              value={formdata?.date_of_joining} required/>
+              <input className="border p-2 rounded hover:border-blue-500" type="text" id="doj" name="date_of_joining" placeholder="Enter Date of Joining" onChange={handleChange} value={formdata?.date_of_joining} required/>
             </div>
           </div>
 
@@ -115,56 +98,44 @@ const {handleChange,handleopen,togglePasswordVisibility,passwordVisible,loaddata
           <div className="flex w-full flex-wrap md:flex-nowrap gap-4 items-center">
             <div className="flex flex-col w-full md:w-1/3">
               <label >Team Type:</label>
-              <input className="border p-2 rounded hover:border-blue-500" type="text"  name="team_type" placeholder="Enter Team Type" onChange={handleChange}
-              value={  formdata?.team_type } required/>
+              <input className="border p-2 rounded hover:border-blue-500" type="text"  name="team_type" placeholder="Enter Team Type" onChange={handleChange} value={  formdata?.team_type } required/>
             </div>
             <div className="flex flex-col w-full md:w-1/3">
               <label >Phone Number:</label>
-              <input className="border p-2 rounded hover:border-blue-500" type="tel"  name="phone_number" placeholder="Enter Phone Number" onChange={handleChange} 
-              value={  formdata?.phone_number } required/>
+              <input className="border p-2 rounded hover:border-blue-500" type="tel"  name="phone_number" placeholder="Enter Phone Number" onChange={handleChange} value={  formdata?.phone_number } required/>
             </div>
             <div className="flex flex-col w-full md:w-1/3">
               <label >Work Status:</label>
-              <input className="border p-2 rounded hover:border-blue-500" type="text"  name="work_status" placeholder="Enter Work Status"  onChange={handleChange}
-               value={  formdata?.work_status } required/>
+              <input className="border p-2 rounded hover:border-blue-500" type="text"  name="work_status" placeholder="Enter Work Status"  onChange={handleChange} value={  formdata?.work_status } required/>
             </div>
           </div>
 
           <div className="flex w-full flex-wrap md:flex-nowrap gap-4 items-center">
             <div className="flex flex-col w-full md:w-1/2">
               <label >OTP Access:</label>
-              <input className="border p-2 rounded hover:border-blue-500" type="text"  name="otp_access" placeholder="Enter OTP Access"
-              value={  formdata?.otp_access }  />
+              <input className="border p-2 rounded hover:border-blue-500" type="text"  name="otp_access" placeholder="Enter OTP Access" value={  formdata?.otp_access }  />
             </div>
             <div className="flex flex-col w-full md:w-1/2">
               <label >OTP Email:</label>
-              <input className="border p-2 rounded hover:border-blue-500" type="email"  name="otp_email" placeholder="Enter OTP Email"
-              value={  formdata?.otp_email }  />
+              <input className="border p-2 rounded hover:border-blue-500" type="email"  name="otp_email" placeholder="Enter OTP Email" value={  formdata?.otp_email }  />
             </div>
           </div>
         </ModalBody>
               <ModalFooter>
-              <button className={`${deletepopup==true?"bg-green-500":"bg-red-500"}  text-white px-3 py-1 rounded-lg mx-1`} onClick={onClose}>
-                            Close
-                            </button>
-                            <button className={`${deletepopup==true?"bg-red-500":"bg-green-500"}  text-white px-3 py-1 rounded-lg mx-1`}  onClick={()=>{(bool?register():update())}}>
-                            {(bool?"Save":"Update")}
-                            </button>
+                  <button className={`${deletepopup==true?"bg-green-500":"bg-red-500"}  text-white px-3 py-1 rounded-lg mx-1`} onClick={onClose}>Close</button>
+                  <button className={`${deletepopup==true?"bg-red-500":"bg-green-500"}  text-white px-3 py-1 rounded-lg mx-1`}  onClick={()=>{(bool?register():update())}}>{(bool?"Save":"Update")}</button>
               </ModalFooter>
-            </>
-          )}
+            </> )}
         </ModalContent>
       </Modal>
           
-            <div className={`flex justify-content-center`}>
-                  <Dialog header="Delete Conformation" visible={deletepopup} style={{ width: '50vw' }} onHide={() => {if (!deletepopup) return; setdeletepopup(false); }}>
-                      <p className="m-0">
-                          Do you want to delete this {`${deleteid}`}
-                      </p>
-                      <div className='py-6'>
-                       
-                       <button className=" bg-gray-500 text-black px-3 py-1 rounded-lg mx-1" onClick={() => {if (!deletepopup) return; setdeletepopup(false); }}>Close </button>
-                       <button className="bg-red-500  text-white px-3 py-1 rounded-lg mx-1" onClick={()=>{deletefun(deleteid);setdeletepopup(false)}}  >Delete </button>
+          {/* delete box model */}
+            <div className={`flex justify-content-center `}>
+                  <Dialog header="Delete Conformation" headerClassName=' text-center'  visible={deletepopup} style={{ width: '50vw' }} onHide={() => {if (!deletepopup) return; setdeletepopup(false); }}>
+                      <p className=" text-center m-0"> Do you want to delete this Employee {`${deleteid}`}</p>
+                      <div className='flex justify-center py-4 px-10 gap-4'>
+                          <button className=" bg-gray-500 text-black px-4 py-1 rounded-lg mx-1" onClick={() => {if (!deletepopup) return; setdeletepopup(false); }}>Close </button>
+                          <button className="bg-red-500  text-white px-4 py-1 rounded-lg mx-1" onClick={()=>{deletefun(deleteid);setdeletepopup(false)}}  >Delete </button>
                       </div> 
                   </Dialog>
             </div>
