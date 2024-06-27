@@ -19,7 +19,8 @@ export default function Login() {
   };
   
   const handleChange = (e) => {
-    setformData({...formdata,...{[e.target.name]: e.target.value }});
+    console.log("hello")
+    setformData({...formdata,[e.target.name]: e.target.value });
   }
 
   const login = async (e) => {

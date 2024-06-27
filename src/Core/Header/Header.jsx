@@ -2,30 +2,38 @@ import React, { useState } from 'react';
 import { Dropdown } from 'primereact/dropdown';
 import { Link, useNavigate } from 'react-router-dom';
 import useauthendication from '../../hooks/useauthendication';
+import Home from '../../Module/Home';
 
 export default function Header() {
     const [selectUser, setSelectedUser] = useState(null);
     const [toggle, setToggle] = useState(false);
     const navigate = useNavigate();
     const [sign, setsign] = useState(true);
-    const {IsloggedIn,gettoken} = useauthendication();
+    const {IsloggedIn,gettoken,userdetails} = useauthendication();
+    console.log(IsloggedIn)
+
+    const user = userdetails();
+    const employeeName = user ? user.employee_name : 'Default Name';
+
+    // console.log(employeeName);
+    console.log(userdetails());
     
     const options = [
-        { name: 'user', code: 'NY' },
+        { name: employeeName, code:'RN'},
         { name: 'Signout', code: 'RM' },
-    ];
+    ]; 
    
 
     const handleDropdownChange = (e) => {
         // setSelectedUser(e.value);
         gettoken()
-        console.log('setting')
         navigate('/');
        
     };
-  console.log(IsloggedIn)
+//   console.log(IsloggedIn)
     return (
-        <header className={`${IsloggedIn?"flex":"hidden"} sticky  flex-wrap justify-start   bg-black text-sm py-4 overflow-x-hidden`}>
+<div>
+           <header className={`${IsloggedIn?"flex":"hidden"} sticky  flex-wrap justify-start   bg-black text-sm py-4 overflow-x-hidden`}>
             <nav className="w-full mx-auto px-4 lg:flex items-center lg:justify-between" aria-label="Global">
                 <div className="w-full flex justify-between items-center">
                    <a className="text-xl font-semibold text-white" href="#">
@@ -57,12 +65,15 @@ export default function Header() {
                                 onChange={handleDropdownChange}
                                 options={options}
                                 optionLabel="name"
-                                placeholder="User"
+                                placeholder="user"
                                 className="text-white mx-2 font-semibold"/>
                         </div>
                     </ul>
                 </div>
             </nav>
-        </header>
+        </header>        
+        </div>
+        
+       
     );
 }
