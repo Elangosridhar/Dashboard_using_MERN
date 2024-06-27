@@ -10,22 +10,24 @@ export default function Login() {
   const navigate = useNavigate()
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [type, settype] = useState("password");
+  const [formdata,setformData] = useState({});
   
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
     passwordVisible? settype("password"):settype("text")
    
   };
-  const [data,setdata] = useState("")
+  
   const handleChange = (e) => {
-    setdata({...data,[e.target.name]:e.target.value});
+    setformData({...formdata,...{[e.target.name]: e.target.value }});
   }
+
   const login = async (e) => {
    
-    console.log(data);
-    const res = await apilogin(data)
+    console.log(formdata);
+    const res = await apilogin(formdata)
     console.log(res)
-    res.message=="successfully logged in"? successlogin(res):toast.error("failed to registered")
+    res.message=="successfully logged in"? successlogin(res):toast.error("Invalid email or password")
     
   }
       
@@ -38,8 +40,8 @@ export default function Login() {
     
   return (
     <div>
-        <Loginform setPasswordVisible={setPasswordVisible} togglePasswordVisibility={togglePasswordVisibility} passwordVisible={passwordVisible} data={data} 
-        setdata={setdata} handelchange={handleChange} login={login} type={type} />
+        <Loginform setPasswordVisible={setPasswordVisible} togglePasswordVisibility={togglePasswordVisibility} passwordVisible={passwordVisible} formdata={formdata} 
+        setformData={setformData} handelchange={handleChange} login={login} type={type} />
     </div>
   )
 }

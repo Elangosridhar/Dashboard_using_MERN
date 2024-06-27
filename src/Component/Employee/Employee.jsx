@@ -35,13 +35,13 @@ export default function Employee() {
       onClose()
       const res = await apiemployee(formdata)
       console.log(res)
-      res.message=="Successfully registered"? sucessreg():toast.error( res.message)
+      res.message=="Successfully registered"? sucessreg(res):toast.error( res.message)
       getallEmployeetrackings();  
     }
     
     const sucessreg = (res) =>{
         setformData();
-        toast.apply(res.message)
+        toast.success(res.message)
     }
   
   
