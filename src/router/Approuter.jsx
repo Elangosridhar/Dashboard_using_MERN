@@ -15,7 +15,7 @@ export default function Approuter() {
         <BrowserRouter>
               <Routes>
                  <Route element={<Main/>}>
-                       <Route path="/home" element={<Home/}></Route>
+                       <Route path="/home" element={<Home/>}></Route>
                        <Route path="/Employee" element={<Employee/>}></Route>
                        <Route path="/"  element={<Login/>}></Route>
                        
