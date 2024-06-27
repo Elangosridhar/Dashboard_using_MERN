@@ -4,7 +4,6 @@ import { Employee } from "../Models/employeeModel.js";
 export const getemployees = async (req,res)=>{
     try{
         console.log(req.query)
-        
         const response = await Employee.find({})
         res.send(response);
     }
@@ -18,7 +17,6 @@ export const saveemployees = async (req, res) => {
     try {
         const response = await new Employee(req.body).save();
         res.send(response);
-
     }
     catch(err){
         console.log(err)
