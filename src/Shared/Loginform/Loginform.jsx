@@ -19,12 +19,12 @@ export default function Loginform(props) {
         <div className="grid md:grid-cols-2 items-center gap-10 max-w-6xl w-full">
           <div>
            <div className="text-6xl font-extrabold lg:leading-[50px] text-white">
-           <span class="bg-clip-text text-transparent bg-gradient-to-r from-stone-300 to-violet-500">
+           <span className="bg-clip-text text-transparent bg-gradient-to-r from-stone-300 to-violet-500">
                 Welcome to
            </span>
             </div>
             <div className="text-6xl font-extrabold lg:leading-[50px] text-white">
-            <span class="bg-clip-text text-transparent bg-gradient-to-r from-stone-300 to-violet-500">
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-stone-300 to-violet-500">
                 Login page ➤
            </span>
            </div>

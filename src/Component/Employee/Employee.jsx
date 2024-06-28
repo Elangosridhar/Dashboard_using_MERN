@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import TableandModel from '../../Shared/EmployeeRegister/TableandModel'
 import { Button, useDisclosure } from '@nextui-org/react';
 import toast from 'react-hot-toast';
-
+import { FilterMatchMode, FilterOperator } from 'primereact/api';
 import { apiemployee, deleteemployee, getemployees, updateemployee } from '../../Service/Registerapi/Registerapi';
 
 
@@ -18,6 +18,9 @@ export default function Employee() {
     const [type, settype] = useState("password");
     const [deleteid , setdeleteid] = useState();
     const [visible, setVisible] = useState(false);
+    const [filters, setFilters] = useState(null);
+    const [globalFilterValue, setGlobalFilterValue] = useState("");
+  
     
     
     const handleopen = () =>{
@@ -27,7 +30,7 @@ export default function Employee() {
     }
   
     const handleChange =async (e) => {
-      console.log("hellow")
+     
       setformData({ ...formdata,...{[e.target.name]: e.target.value }});  
     };
   
@@ -69,9 +72,10 @@ export default function Employee() {
     ])
    };
   
-    useEffect(() => {
-      getallEmployeetrackings();
-    }, []);
+   useEffect(() => {
+    getallEmployeetrackings();
+    initFilters(); // Initialize filters on component mount
+}, []);
 
 
     // function for serial no.
@@ -137,6 +141,41 @@ export default function Employee() {
      
     };
 
+
+     // Initialize filters
+     const initFilters = () => {
+      setFilters({
+          global: { value: null, matchMode: FilterMatchMode.CONTAINS },
+          name: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
+          'country.name': { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }] },
+          representative: { value: null, matchMode: FilterMatchMode.IN },
+          date: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.DATE_IS }] },
+          balance: { operator: FilterOperator.AND, constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }] },
+          status: { operator: FilterOperator.OR, constraints: [{ value: null, matchMode: FilterMatchMode.EQUALS }] },
+          activity: { value: null, matchMode: FilterMatchMode.BETWEEN },
+          verified: { value: null, matchMode: FilterMatchMode.EQUALS }
+      });
+      setGlobalFilterValue('');
+  };
+
+  const clearFilter = () => {
+      initFilters();
+  };
+
+  const onGlobalFilterChange = (e) => {
+      const value = e.target.value;
+      let _filters = { ...filters };
+
+      _filters['global'].value = value;
+
+      setFilters(_filters);
+      setGlobalFilterValue(value);
+  };
+
+
+  
+
+
     const renderHeader = () => {
       return (
           <div className="flex justify-content-between">
@@ -148,7 +187,7 @@ export default function Employee() {
                  <div className="absolute inset-y-0 left-0 flex items-center pl-2">
                     <i className="fi fi-rr-search"></i>
                  </div>
-                 <input type="text" placeholder="Search" className="pl-5 pr-2 py-2 border rounded-md w-full focus:outline-none focus:ring-offset-gray-950-500 focus: ring-offset-gray-950-500"/>
+                 <input type="text" value={globalFilterValue} onChange={onGlobalFilterChange} placeholder="Search" className="pl-5 pr-2 py-2 border rounded-md w-full focus:outline-none focus:ring-offset-gray-950-500 focus: ring-offset-gray-950-500"/>
                 </div>
              </form>
           </div>
@@ -162,7 +201,7 @@ export default function Employee() {
     <div>
        <TableandModel handleChange={handleChange} renderHeader={renderHeader} handleopen={handleopen} togglePasswordVisibility={togglePasswordVisibility} loaddata={loaddata} useDisclosure={useDisclosure} formdata={formdata}
        update={update} deletefun={deletefun} Action={Action} register={register} isOpen={isOpen} onOpenChange={onOpenChange} sno={sno} type={type} data={data} setdeletepopup={setdeletepopup}
-        deletepopup={deletepopup} deleteid={deleteid} passwordVisible={passwordVisible}  onClose={onClose} bool={bool} setbool={setbool} key={keys} setkey={setkey} visible={visible} setvisible={setVisible}/>
+        deletepopup={deletepopup} deleteid={deleteid} passwordVisible={passwordVisible} filters={filters}   onClose={onClose} bool={bool} setbool={setbool} key={keys} setkey={setkey} visible={visible} setvisible={setVisible}/>
     </div>
   )
 }

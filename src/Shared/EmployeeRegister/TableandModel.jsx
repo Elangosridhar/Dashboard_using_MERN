@@ -10,11 +10,10 @@ import { Dialog } from 'primereact/dialog';
 import useauthendication from '../../hooks/useauthendication';
 
 export default function TableandModel(props) {
-const {userdetails} = useauthendication();
-const user = userdetails();
+
 
 const {handleChange,handleopen,togglePasswordVisibility,passwordVisible,loaddata,update,onClose,keys,setkeys,renderHeader,
-  deletefun,Action,register,isOpen,onOpenChange,sno,type,data,deletepopup,formdata,setdeletepopup,bool, setbool,deleteid,setdeleteid,visible,setVisible} = props;
+  deletefun,Action,register,isOpen,onOpenChange,sno,type,data,deletepopup,filters,formdata,setdeletepopup,bool, setbool,deleteid,setdeleteid,visible,setVisible} = props;
 
     const header = renderHeader();
   return (
@@ -22,7 +21,7 @@ const {handleChange,handleopen,togglePasswordVisibility,passwordVisible,loaddata
              
          
            <div className="card">
-            <DataTable value={data}  paginator rows={5} rowsPerPageOptions={[5, 10, 25, 50]} showGridlines={true}  tableStyle={{ minWidth: '50rem' }} emptyMessage="No customers found." header={header}>
+            <DataTable value={data}  paginator rows={5} rowsPerPageOptions={[5, 10, 25, 50]} showGridlines={true}  tableStyle={{ minWidth: '50rem' }} emptyMessage="No customers found." header={header} filters={filters} globalFilterFields={['employee_name', 'employee_email', 'role', 'designation']} >
                               <Column field="SI_No" header="SI_NO" body={sno} headerClassName="bg-black text-white border-1 " className='border-1 border-black'></Column> 
                               <Column field="Action" header="Action" body={Action} headerClassName="bg-black text-white border-1" className='border-1 border-black'></Column> 
                               <Column field="employee_id" header="Employee_ID" sortable filter headerClassName="bg-black text-white border-1" className='border-1 border-black'></Column>
@@ -133,7 +132,7 @@ const {handleChange,handleopen,togglePasswordVisibility,passwordVisible,loaddata
           {/* delete box model */}
             <div className={`flex justify-content-center `}>
                   <Dialog header="Delete Conformation" headerClassName=' text-center'  visible={deletepopup} style={{ width: '50vw' }} onHide={() => {if (!deletepopup) return; setdeletepopup(false); }}>
-                      <p className=" text-center m-0"> Do you want to delete this Employee {`${user.employee_name}`}</p>
+                      <p className=" text-center m-0"> Do you want to delete this Employee {`${deleteid}`}</p>
                       <div className='flex justify-center py-4 px-10 gap-4'>
                           <button className=" bg-gray-500 text-black px-4 py-1 rounded-lg mx-1" onClick={() => {if (!deletepopup) return; setdeletepopup(false); }}>Close </button>
                           <button className="bg-red-500  text-white px-4 py-1 rounded-lg mx-1" onClick={()=>{deletefun(deleteid);setdeletepopup(false)}}  >Delete </button>
