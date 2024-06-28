@@ -6,7 +6,7 @@ export const apiemployee = async (datas) =>{
     return res.data
 }
 
-export const  getemployees = async () => {
+export const  getemployees = async (datas) => {
     const res = await axios.get(`${apiurl()}/employees/getemployees`,)
     return res.data
 }

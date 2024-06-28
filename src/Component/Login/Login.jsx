@@ -18,10 +18,10 @@ export default function Login() {
    
   };
   
-  const handleChange = (e) => {
-    console.log("hello")
-    setformData({...formdata,[e.target.name]: e.target.value });
-  }
+  const handleChange =async (e) => {
+    console.log("hellow")
+    setformData({ ...formdata,...{[e.target.name]: e.target.value }});  
+  };
 
   const login = async (e) => {
    
@@ -42,7 +42,7 @@ export default function Login() {
   return (
     <div>
         <Loginform setPasswordVisible={setPasswordVisible} togglePasswordVisibility={togglePasswordVisibility} passwordVisible={passwordVisible} formdata={formdata} 
-        setformData={setformData} handelchange={handleChange} login={login} type={type} />
+        setformData={setformData} handleChange={handleChange} login={login} type={type} />
     </div>
   )
 }

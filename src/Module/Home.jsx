@@ -15,7 +15,7 @@ export default function Home() {
               <div className="px-5">
                 <i className="fi fi-ts-corporate-alt text-black text-4xl"></i>
               </div>
-              <div className="text-lg font-medium ml-3">user</div>
+              <div className="text-lg font-medium ml-3">Employee</div>
             </div>
           </Link>
         </div>

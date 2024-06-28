@@ -15,12 +15,13 @@ export default function Approuter() {
         <BrowserRouter>
               <Routes>
                  <Route element={<Main/>}>
-                       <Route path="/home" element={<Home/>}></Route>
-                       <Route path="/Employee" element={<Employee/>}></Route>
-                       <Route path="/"  element={<Login/>}></Route>
+                       <Route path="/home" element={<ProtectedRout><Home/></ProtectedRout>}></Route>
+                       <Route path="/Employee" element={<ProtectedRout><Employee/></ProtectedRout>}></Route>
+                       
                        
                       
                  </Route>
+                 <Route path="/"  element={<Login/>}></Route>
               </Routes>
 
         </BrowserRouter>

@@ -10,7 +10,7 @@ export default function Header() {
     const navigate = useNavigate();
     const [sign, setsign] = useState(true);
     const {IsloggedIn,gettoken,userdetails} = useauthendication();
-    console.log(IsloggedIn)
+    
 
     const user = userdetails();
     const employeeName = user ? user.employee_name : 'Default Name';
@@ -59,14 +59,7 @@ export default function Header() {
                         <li><a href="#"><i className="fi fi-rr-expand text-white"></i></a></li>
                         <div className="flex items-center">
                             <a className="px-1" href="#"><i className="fi fi-rr-user text-white"></i></a>
-                            <Dropdown
-                                
-                                value={selectUser}
-                                onChange={handleDropdownChange}
-                                options={options}
-                                optionLabel="name"
-                                placeholder="user"
-                                className="text-white mx-2 font-semibold"/>
+                            <Dropdown value={selectUser} onChange={handleDropdownChange} options={options} optionLabel="name" placeholder={employeeName} className="text-white mx-2 font-semibold"/>
                         </div>
                     </ul>
                 </div>

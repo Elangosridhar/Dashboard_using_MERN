@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 
 import TableandModel from '../../Shared/EmployeeRegister/TableandModel'
-import { useDisclosure } from '@nextui-org/react';
+import { Button, useDisclosure } from '@nextui-org/react';
 import toast from 'react-hot-toast';
+
 import { apiemployee, deleteemployee, getemployees, updateemployee } from '../../Service/Registerapi/Registerapi';
 
 
@@ -26,6 +27,7 @@ export default function Employee() {
     }
   
     const handleChange =async (e) => {
+      console.log("hellow")
       setformData({ ...formdata,...{[e.target.name]: e.target.value }});  
     };
   
@@ -135,12 +137,30 @@ export default function Employee() {
      
     };
 
+    const renderHeader = () => {
+      return (
+          <div className="flex justify-content-between">
+              <Button className=" bg-white text-xl" onClick={handleopen}>
+                   <i className="fi fi-ss-add"></i>
+             </Button>
+             <form action="">
+                <div className="relative">
+                 <div className="absolute inset-y-0 left-0 flex items-center pl-2">
+                    <i className="fi fi-rr-search"></i>
+                 </div>
+                 <input type="text" placeholder="Search" className="pl-5 pr-2 py-2 border rounded-md w-full focus:outline-none focus:ring-offset-gray-950-500 focus: ring-offset-gray-950-500"/>
+                </div>
+             </form>
+          </div>
+      );
+  };
+
 
 
 
   return (
     <div>
-       <TableandModel handleChange={handleChange} handleopen={handleopen} togglePasswordVisibility={togglePasswordVisibility} loaddata={loaddata} useDisclosure={useDisclosure} formdata={formdata}
+       <TableandModel handleChange={handleChange} renderHeader={renderHeader} handleopen={handleopen} togglePasswordVisibility={togglePasswordVisibility} loaddata={loaddata} useDisclosure={useDisclosure} formdata={formdata}
        update={update} deletefun={deletefun} Action={Action} register={register} isOpen={isOpen} onOpenChange={onOpenChange} sno={sno} type={type} data={data} setdeletepopup={setdeletepopup}
         deletepopup={deletepopup} deleteid={deleteid} passwordVisible={passwordVisible}  onClose={onClose} bool={bool} setbool={setbool} key={keys} setkey={setkey} visible={visible} setvisible={setVisible}/>
     </div>

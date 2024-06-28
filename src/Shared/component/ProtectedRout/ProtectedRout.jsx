@@ -1,10 +1,13 @@
 import { Navigate } from "react-router-dom";
 import useauthendication from "../../../hooks/useauthendication"
 
-export default function ProtectedRout({childeren}) {
+export default function ProtectedRout(props) {
+  const {children} = props
 const {IsloggedIn}= useauthendication();
 if (!IsloggedIn){
     return <Navigate to={'/'} />
+}else{
+  return children;
 }
-  return childeren;
+  
 }
