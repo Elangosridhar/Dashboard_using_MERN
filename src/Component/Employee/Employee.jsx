@@ -7,6 +7,7 @@ import { FilterMatchMode, FilterOperator } from 'primereact/api';
 import { apiemployee, deleteemployee, getemployees, updateemployee } from '../../Service/Registerapi/Registerapi';
 
 
+
 export default function Employee() {
     const {isOpen, onClose ,onOpen, onOpenChange} = useDisclosure();
     const [data, setData] = useState([]);
@@ -202,6 +203,7 @@ export default function Employee() {
        <TableandModel handleChange={handleChange} renderHeader={renderHeader} handleopen={handleopen} togglePasswordVisibility={togglePasswordVisibility} loaddata={loaddata} useDisclosure={useDisclosure} formdata={formdata}
        update={update} deletefun={deletefun} Action={Action} register={register} isOpen={isOpen} onOpenChange={onOpenChange} sno={sno} type={type} data={data} setdeletepopup={setdeletepopup}
         deletepopup={deletepopup} deleteid={deleteid} passwordVisible={passwordVisible} filters={filters}   onClose={onClose} bool={bool} setbool={setbool} key={keys} setkey={setkey} visible={visible} setvisible={setVisible}/>
+      
     </div>
   )
 }

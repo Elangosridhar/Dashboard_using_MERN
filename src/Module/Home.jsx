@@ -18,6 +18,15 @@ export default function Home() {
               <div className="text-lg font-medium ml-3">Employee</div>
             </div>
           </Link>
+
+          <Link to="/Employeedashboard">
+            <div className="flex items-center bg-white border border-gray-200 shadow-sm rounded-xl p-4 md:p-5 hover:shadow-lg transition hover:border-black duration-300 ease-in-out">
+              <div className="px-5">
+                <i className="fi fi-tr-circle-user  text-black text-4xl"></i>
+              </div>
+              <div className="text-lg font-medium ml-3 text-wrap">EmployeeDashboard</div>
+            </div>
+          </Link>
         </div>
       </div>
     </section>
