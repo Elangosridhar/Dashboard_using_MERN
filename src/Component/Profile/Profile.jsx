@@ -25,9 +25,7 @@ export default function Profile(props) {
 
 
     useEffect(() => {
-        // Fetch employee details from the backend
-        
-        fetchEmployeeDetails();
+           fetchEmployeeDetails();
     }, []);
 
     console.log(teamMembers)

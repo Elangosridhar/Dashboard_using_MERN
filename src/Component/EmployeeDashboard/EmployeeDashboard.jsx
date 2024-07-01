@@ -1,87 +1,81 @@
-import { Avatar } from '@nextui-org/react'
-import React from 'react'
+import { Avatar, DateRangePicker } from '@nextui-org/react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import {RangeCalendar} from "@nextui-org/react";
+import {today, getLocalTimeZone} from '@internationalized/date';
+import Dashboardpage from '../../Shared/Dashboardpage/Dashboardpage';
+import { format, addMonths, subMonths, startOfToday, startOfWeek, addDays, addWeeks } from 'date-fns';
+
 
 export default function EmployeeDashboard() {
-  return (
-    <div className="min-h-screen bg-gray-100 p-4">
-    <div className="flex justify-between items-center bg-black text-white p-4 rounded">
-        <div className="text-lg font-semibold">Dashboard</div>
-        <div className="flex items-center space-x-4">
-        
-        </div>
-    </div>
-    <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 mt-4">
-        <div className=" bg-white p-6 rounded shadow">
-            <div className="flex justify-between items-center">
-                <div className="text-lg font-semibold">00:00:00</div>
-                <button className="bg-red-500 text-white px-4 py-2 rounded">Checkout</button>
-            </div>
-            <div className="text-sm text-gray-500 mt-2">Start time: 00:00:00</div>
-        </div>
-        <div className="bg-white p-6 rounded shadow flex items-center justify-between">
-            <i className="pi pi-users text-3xl text-green-500"></i>
-            <div>
-                <div className="text-xl font-semibold">00</div>
-                <div className="text-sm text-gray-500">Total Present</div>
-            </div>
-        </div>
-        <div className="bg-white p-6 rounded shadow flex items-center justify-between">
-            <i className="pi pi-user-minus text-3xl text-red-500"></i>
-            <div>
-                <div className="text-xl font-semibold">0</div>
-                <div className="text-sm text-gray-500">Total Absent</div>
-            </div>
-        </div>
-        <div className="bg-white p-6 rounded shadow flex items-center justify-between">
-            <i className="pi pi-calendar text-3xl text-pink-500"></i>
-            <div>
-                <div className="text-xl font-semibold">Upcoming Birthday</div>
-                <div className="text-sm text-gray-500">No Data Found!!</div>
-            </div>
-        </div>
-    </div>
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-4">
-        <div className="col-span-2 bg-white p-6 rounded shadow">
-            <div className="flex justify-between items-center">
-                <button className="bg-blue-500 text-white px-4 py-2 rounded">Today</button>
-                <div className="text-lg font-semibold">June 2024</div>
-                <div>
-                    <button className="bg-blue-500 text-white px-4 py-2 rounded">Month</button>
-                    <button className="bg-gray-300 text-black px-4 py-2 rounded ml-2">Week</button>
-                    <button className="bg-gray-300 text-black px-4 py-2 rounded ml-2">Day</button>
-                    <button className="bg-gray-300 text-black px-4 py-2 rounded ml-2">List</button>
+    const [currentMonth, setCurrentMonth] = useState(startOfToday());
+    const [selectedDate, setSelectedDate] = useState(new Date());
+    const [viewMode, setViewMode] = useState('month');
+
+    const nextMonth = () => {
+        setCurrentMonth(addMonths(currentMonth, 1));
+    };
+
+    const prevMonth = () => {
+        setCurrentMonth(subMonths(currentMonth, 1));
+    };
+
+    const nextWeek = () => {
+        setCurrentMonth(addWeeks(currentMonth, 1));
+    };
+
+    const prevWeek = () => {
+        setCurrentMonth(addWeeks(currentMonth, -1));
+    };
+
+    const onDateClick = day => {
+        setSelectedDate(day);
+        setViewMode('day');
+    };
+
+    const renderHeader = () => {
+        const dateFormat = "MMMM yyyy";
+
+        return (
+            <div className=" flex justify-between items-center p-4 bg-gray-100 rounded-t-lg">
+                <div className="flex items-center ">
+                    <button className="bg-blue-500 text-white px-2 py-1" onClick={viewMode === 'month' ? prevMonth : viewMode === 'week' ? prevWeek : null}>
+                       <i className="fi fi-br-angle-left"></i>
+                    </button>
+                    <button className="bg-blue-500 text-white px-2 py-1" onClick={viewMode === 'month' ? nextMonth : viewMode === 'week' ? nextWeek : null}>
+                        <i class="fi fi-br-angle-right"></i>
+                    </button>
                 </div>
-            </div>
-            <div className="mt-4">
-                {/* Add your calendar component here */}
-                <div className="grid grid-cols-7 gap-2">
-                    {/* Example calendar days */}
-                    <div className="p-2 text-center">Sun</div>
-                    <div className="p-2 text-center">Mon</div>
-                    <div className="p-2 text-center">Tue</div>
-                    <div className="p-2 text-center">Wed</div>
-                    <div className="p-2 text-center">Thu</div>
-                    <div className="p-2 text-center">Fri</div>
-                    <div className="p-2 text-center">Sat</div>
-                    {/* Add more days */}
-                </div>
-            </div>
-        </div>
-        <div className="bg-white p-6 rounded shadow">
-            <div className="text-lg font-semibold">Total Working Days/Month</div>
-            <div className="mt-4">
-                <div className="flex justify-between items-center">
-                    <div>01/01/2024 - 12/30/2024</div>
+                <span className="text-lg font-semibold">{format(currentMonth, dateFormat)}</span>
+                
                     <div>
-                        <i className="pi pi-calendar text-xl"></i>
+                        <button className={`bg-blue-500 text-black px-2 py-1 rounded ${viewMode === 'month' ? '' : 'bg-gray-300 text-white'}`} onClick={() => setViewMode('month')}>month</button>
+                        <button className={`bg-blue-500 text-black px-2 py-1 rounded ml-2 ${viewMode === 'week' ? '' : 'bg-gray-300 text-white'}`} onClick={() => setViewMode('week')}>week</button>
+                        <button className={`bg-blue-500 text-black px-2 py-1 rounded ml-2 ${viewMode === 'day' ? '' : 'bg-gray-300 text-white'}`} onClick={() => setViewMode('day')}>day</button>
+                        <button className="bg-gray-300 text-black px-2 py-1 rounded ml-2">list</button>
                     </div>
-                </div>
-              
                 
             </div>
-        </div>
-    </div>
-</div>
+        );
+    };
+
+    const renderDays = () => {
+        const days = [];
+        const dateFormat = "eeee";
+        const startDate = startOfWeek(currentMonth);
+
+        for (let i = 0; i < 7; i++) {
+            days.push(
+                <div className="col col-center p-2 text-center font-medium" key={i}>
+                    {format(addDays(startDate, i), dateFormat)}
+                </div>
+            );
+        }
+        return <div className="days row flex bg-gray-200">{days}</div>;
+    };
+
+  return (
+       <Dashboardpage currentMonth={currentMonth} setCurrentMonth={setCurrentMonth} selectedDate={selectedDate} setSelectedDate={setSelectedDate} viewMode={viewMode} setViewMode={setViewMode} 
+       nextMonth={nextMonth} prevMonth={prevMonth} nextWeek={nextWeek} prevWeek={prevWeek} onDateClick={onDateClick} renderHeader={renderHeader} renderDays={renderDays} />
   )
 }

@@ -13,6 +13,7 @@
     "@flaticon/flaticon-uicons": "^3.2.1",
     "@nextui-org/react": "^2.4.1",
     "axios": "^1.7.2",
+    "date-fns": "^3.6.0",
     "framer-motion": "^11.2.10",
     "preline": "^2.3.0",
     "primeflex": "^3.3.1",
